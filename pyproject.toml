@@ -1,0 +1,66 @@
+[tool.poetry]
+name = "webuuid"
+version = "0.0.0"
+description = "Optimize UUID for web services"
+readme = "README.md"
+authors = ["JGoutin"]
+license = "BSD-2-Clause"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Typing :: Typed",
+]
+keywords = ["uuid", "uuid6", "uuid7", "pydantic", "fastapi"]
+repository = "https://github.com/JGoutin/webuuid"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+bandit = "*"
+black = "*"
+flake8 = "*"
+flake8-docstrings = "*"
+mypy = "*"
+pre-commit = "*"
+pytest-cov = "*"
+radon = "*"
+yamllint = "*"
+pydantic = "*"
+types-setuptools = "*"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--strict-markers",
+    "--cov=webuuid",
+]
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:"
+]
+
+[tool.mypy]
+disallow_any_generics = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+implicit_reexport = false
+strict_equality = true
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
