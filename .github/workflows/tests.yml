@@ -21,9 +21,10 @@ jobs:
   tests:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: ["ubuntu-latest"]
-        python-version: ["3.x"]
+        python-version: ["3.x", "3.8", "3.9", "3.10"]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -48,31 +49,31 @@ jobs:
 
       - name: Python code style
         run: $POETRY_HOME/bin/poetry run black . --check --diff
-        if: ${{ always() }}
+        if: ${{ matrix.python-version == '3.x' }}
 
       - name: Python code quality
         run: $POETRY_HOME/bin/poetry run flake8 --docstring-convention google
-        if: ${{ always() }}
+        if: ${{ matrix.python-version == '3.x' }}
 
       - name: Python code typing
         run: $POETRY_HOME/bin/poetry run mypy --strict --install-types --non-interactive .
-        if: ${{ always() }}
+        if: ${{ matrix.python-version == '3.x' }}
 
       - name: Python code complexity
         run: $POETRY_HOME/bin/poetry run radon cc -n C webuuid 1>&2
-        if: ${{ always() }}
+        if: ${{ matrix.python-version == '3.x' }}
 
       - name: Python code maintainability
         run: $POETRY_HOME/bin/poetry run radon mi -n B webuuid 1>&2
-        if: ${{ always() }}
+        if: ${{ matrix.python-version == '3.x' }}
 
       - name: Python code security
         run: $POETRY_HOME/bin/poetry run bandit webuuid -rs B404,B603
-        if: ${{ always() }}
+        if: ${{ matrix.python-version == '3.x' }}
 
       - name: YAML code style
         run: $POETRY_HOME/bin/poetry run yamllint -s .
-        if: ${{ always() }}
+        if: ${{ matrix.python-version == '3.x' }}
 
       - name: Test
         run: $POETRY_HOME/bin/poetry run pytest --junitxml=test-results.xml --cov-report xml

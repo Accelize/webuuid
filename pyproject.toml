@@ -15,7 +15,7 @@ keywords = ["uuid", "uuid6", "uuid7", "pydantic", "fastapi"]
 repository = "https://github.com/JGoutin/webuuid"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.8"
 
 [tool.poetry.dev-dependencies]
 bandit = "*"

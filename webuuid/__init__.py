@@ -1,4 +1,5 @@
 """WebUUID."""
+from __future__ import annotations
 from hashlib import blake2b as _blake2b
 from secrets import randbits as _randbits
 from time import time_ns as _time_ns
